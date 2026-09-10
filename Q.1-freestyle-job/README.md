@@ -2,12 +2,12 @@ Q1 Explanation
 
 Project Name: ci-demo-job is the name of the Jenkins Freestyle job we created.
 
-SCM: SCM means Source Code Management. We connected Jenkins with our public Git repository so Jenkins can get the latest code.
+SCM: SCM means Source Code Management. We connected Jenkins to our public GitHub repository so it can get the latest version of the project.
 
-Build Step: After getting the code, Jenkins runs the required commands to install dependencies and execute the tests.
+Build Step: We used build.sh as the build script. Jenkins gives permission to execute it and then runs ./build.sh. The script contains the required dependency/setup and test commands.
 
-Trigger — Poll SCM: We selected Poll SCM so Jenkins can automatically check GitHub for new changes.
+Trigger — Poll SCM: We selected Poll SCM so Jenkins regularly checks GitHub for new changes.
 
-Why Poll SCM: Our Jenkins server is not publicly accessible, so GitHub cannot directly send a webhook to Jenkins. Poll SCM solves this by making Jenkins check the repository itself.
+Why Poll SCM: Our Jenkins server is not publicly accessible, so GitHub cannot send webhook requests to it. Poll SCM allows Jenkins to check the repository by itself.
 
-H/5 * * * *: This tells Jenkins to check the Git repository approximately every 5 minutes. If a new change is found, Jenkins starts a build.
+Polling Schedule — H/5 * * * *: Jenkins checks the repository approximately every 5 minutes. If it detects a new change, the Freestyle job starts and executes build.sh
