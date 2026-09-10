@@ -1,1 +1,19 @@
+pipeline {
+    agent any
 
+    stages {
+        stage('Q5 Practical Test') {
+            steps {
+                echo 'Q5 Root Cause Analysis Practical'
+                echo 'Testing Jenkins workspace and SCM configuration'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Workspace cleanup completed'
+            deleteDir()
+        }
+    }
+}
