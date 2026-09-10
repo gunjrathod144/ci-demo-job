@@ -1,1 +1,39 @@
+pipeline {
+    agent any
 
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/gunjrathod144/ci-demo-job.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building the project'
+            }
+        }
+
+        stage('Parallel Tests') {
+            parallel {
+                stage('Unit Tests') {
+                    steps {
+                        echo 'Running unit tests'
+                    }
+                }
+
+                stage('Lint') {
+                    steps {
+                        echo 'Running lint checks'
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            deleteDir()
+        }
+    }
+}
