@@ -4,13 +4,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/gunjrathod144/ci-demo-job.git'
+                git branch: 'main', url: 'https://github.com/gunjrathod144/Ci-demo-job.git'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building the project'
+                sh 'npm install'
+                sh 'npm run build'
             }
         }
 
@@ -18,13 +19,13 @@ pipeline {
             parallel {
                 stage('Unit Tests') {
                     steps {
-                        echo 'Running unit tests'
+                        sh 'npm test'
                     }
                 }
 
                 stage('Lint') {
                     steps {
-                        echo 'Running lint checks'
+                        sh 'npm run lint'
                     }
                 }
             }
