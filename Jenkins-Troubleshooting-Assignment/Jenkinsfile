@@ -1,1 +1,17 @@
 
+pipleine{
+  agent any
+
+  stages{
+    stage('build') {
+      steps{
+        echo 'building Application'
+      }
+    }
+    stage('Test') {
+      steps{
+        echo 'Running Tests'
+      }
+    }
+  }
+}
