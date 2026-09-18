@@ -1,17 +1,31 @@
-
-pipleine{
+pipeline {
   agent any
 
-  stages{
-    stage('build') {
+  stages {
+    stage('Build') {
       steps{
-        echo 'building Application'
+        echo 'Building application'
       }
     }
-    stage('Test') {
+    stage('Test'){
+      when{
+        anyOf{
+          branch 'main'
+          branch 'dev'
+        }
+      }
       steps{
-        echo 'Running Tests'
+        echo 'running tests'
+      }
+    }
+    stage('Deploy') {
+      when{
+        branch 'main'
+      }
+      steps{
+        sh './deploy.sh'
       }
     }
   }
 }
+    
